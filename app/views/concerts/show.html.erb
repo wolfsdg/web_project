@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b><h3><%= @concert.title %></h3></b>
+</p>
+<p>
+  <h5>Guest Artist:  <%= @concert.name_art %></h5>
+</p>
+<p>
+  <%= @concert.full_desc %>
+</p>
+<p>
+  Onset and Duration <%= @concert.time_dur %>
+</p>
+<p>
+  <h5>Price: USD <%= @concert.price %></h5>
+</p>
+<p>
+  <h5>by <%= @concert.user.full_name %></h5>
+</p>
+<p>
+  <% if user_signed_in? && (current_user == @concert.user) %>
+    <%= link_to 'Edit Post', edit_concert_path(@concert), class: "btn btn-warning btn-small" %>
+  <% end %>
+</p>
+
+<%= link_to 'Back', concerts_path, class: "btn btn-primary" %>

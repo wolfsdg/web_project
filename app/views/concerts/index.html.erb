@@ -1,0 +1,26 @@
+<div class="page-header">
+  <h1>All Concerts</h1>
+</div>
+
+<% if user_signed_in? %>
+<%= link_to 'New Concert', new_concert_path %>
+<% end %>
+<% @concerts.each do |concert| %>
+
+<div class="concert">
+  <h3><%= link_to concert.title, concert %></h3>
+    <p>Day of de Event: <%= concert.date %></p>
+    <p>Guest artis: <%= concert.name_art %></p>
+    <p>Price: USD <%= concert.price %></p>
+    <div class="meta">
+      post by <%= concert.user.full_name %> | <%= concert.created_at.strftime("%Y-%m-%d")  %></td>
+      <% if current_user == concert.user %>
+      <span class = "admin">
+        | <%= link_to 'Edit', edit_concert_path(concert) %></td> 
+        | <%= link_to 'Delete', concert, method: :delete, data: { confirm: 'Are you sure Delete this status?' } %>
+      </span>
+      <% end %>
+    </div>
+</div>
+
+<% end %> 

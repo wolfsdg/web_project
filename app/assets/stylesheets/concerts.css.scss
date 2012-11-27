@@ -1,0 +1,24 @@
+// Place all the styles related to the concerts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.concert {
+  border-bottom: solid 1px #CCC;
+  padding: 5px 0;
+}
+
+.concert p {
+  margin: 4px 0;
+}
+
+.concert.hover {
+  background: #F0F0F0;
+}
+
+.concert .admin {
+  display:none;
+}
+
+.concert:hover .admin {
+  display:inline;
+}
