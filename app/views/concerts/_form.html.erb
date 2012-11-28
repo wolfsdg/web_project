@@ -12,11 +12,14 @@
       </div>
     <% end %>
 
-
     <%= f.hidden_field :user_id, :value => current_user.id %>
 
     <p>Name Concert</p>
     <%= f.input :title, :label => '-' %>
+    <p>________</p>
+    <div class="field">
+      <%= f.input :poster, as: :file %>
+    </div>
     <p>________</p>
     <p>Date</p>
     <td><%= f.text_field :date, :id => "datepicker" %></td>
@@ -35,9 +38,9 @@
     <p>________</p>
     <p>Concert Details </p>
     <%= f.input :full_desc, :label => '-' %>
-    <p>________</p>
+
     <div class="form-actions">
-      <%= f.button :submit, "Publish Concert Info" %>
+      <%= f.button :submit, "Publish Concert Info", class: "btn btn-info" %>
     </div>
   <% end %>
 <% end %> 

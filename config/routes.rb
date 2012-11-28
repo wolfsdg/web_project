@@ -5,7 +5,7 @@ WebProyect::Application.routes.draw do
   # first created -> highest priority.
 
   devise_scope :user do
-    get 'resgiter', to: 'devise/resgitrations#new', as: :register
+    get 'register', to: 'devise/registrations#new', as: :register
     get 'login', to: 'devise/sessions#new', as: :login
     get 'logout', to: 'devise/sessions#destroy', as: :logout
   end 
@@ -13,6 +13,10 @@ WebProyect::Application.routes.draw do
   resources :concerts
   get 'Homepage', to: "concerts#index", as: :homepage
   root :to => "concerts#index"
+
+  resources :users do 
+    resources :follows
+  end
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action

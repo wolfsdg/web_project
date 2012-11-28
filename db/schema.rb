@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121127154649) do
+ActiveRecord::Schema.define(:version => 20121128194208) do
 
   create_table "concerts", :force => true do |t|
     t.string   "title"
@@ -22,11 +22,25 @@ ActiveRecord::Schema.define(:version => 20121127154649) do
     t.text     "full_desc"
     t.string   "song"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.string   "poster_file_name"
+    t.string   "poster_content_type"
+    t.integer  "poster_file_size"
+    t.datetime "poster_updated_at"
   end
 
   add_index "concerts", ["user_id"], :name => "index_concerts_on_user_id"
+
+  create_table "follows", :force => true do |t|
+    t.integer  "followed_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "follower_id"
+  end
+
+  add_index "follows", ["followed_id"], :name => "index_follows_on_followed_id"
+  add_index "follows", ["follower_id"], :name => "index_follows_on_follower_id"
 
   create_table "users", :force => true do |t|
     t.string   "full_name",              :default => "", :null => false

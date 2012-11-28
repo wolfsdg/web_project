@@ -13,8 +13,7 @@ class ConcertsController < ApplicationController
   end
   
   def index
-    @concerts = Concert.order("created_at DESC")
-
+    @concerts = Concert.order("created_at DESC").page(params[:page]).per(6)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @concerts }
