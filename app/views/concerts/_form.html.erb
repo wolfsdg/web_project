@@ -16,26 +16,26 @@
     <%= f.hidden_field :user_id, :value => current_user.id %>
 
     <p>Name Concert</p>
-    <%= f.input :title, :label => '' %>
-
+    <%= f.input :title, :label => '-' %>
+    <p>________</p>
     <p>Date</p>
     <td><%= f.text_field :date, :id => "datepicker" %></td>
-
+    <p>________</p>
     <p>Time Concert Details </p>
     <%= f.input :time_dur, :label => '-' %>
-
+    <p>________</p>
     <p>Price </p>
     <%= f.input :price, :label => '-' %>
-
+    <p>________</p>
     <p> Guest Artist </p>
-    <%= f.input :name_art, :id => "concert_name_art", :label => '' %>
-
+    <%= f.input :name_art, :label => '-' %>
+    <p>________</p>
     <p> Sample Song </p>
-    <%= f.input :song, label_method: :full_name, :label => '-' %>
-
+    <%= f.input :song, collection: [@concert.song] %>
+    <p>________</p>
     <p>Concert Details </p>
-    <%= f.input :full_desc, :label => '' %>
-      
+    <%= f.input :full_desc, :label => '-' %>
+    <p>________</p>
     <div class="form-actions">
       <%= f.button :submit, "Publish Concert Info" %>
     </div>

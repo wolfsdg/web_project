@@ -4,8 +4,14 @@ WebProyect::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
-  resources :concerts
+  devise_scope :user do
+    get 'resgiter', to: 'devise/resgitrations#new', as: :register
+    get 'login', to: 'devise/sessions#new', as: :login
+    get 'logout', to: 'devise/sessions#destroy', as: :logout
+  end 
 
+  resources :concerts
+  get 'Homepage', to: "concerts#index", as: :homepage
   root :to => "concerts#index"
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'

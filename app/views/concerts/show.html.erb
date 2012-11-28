@@ -7,6 +7,9 @@
   <h5>Guest Artist:  <%= @concert.name_art %></h5>
 </p>
 <p>
+  Consert day <%= @concert.date %>
+</p>
+<p>
   <%= @concert.full_desc %>
 </p>
 <p>
@@ -14,10 +17,20 @@
 </p>
 <p>
   <h5>Price: USD <%= @concert.price %></h5>
-</p>
+</p>  
 <p>
   <h5>by <%= @concert.user.full_name %></h5>
 </p>
+<% unless @concert.song.blank? %>
+<div class="container">
+  <p>
+  <h5>Sample Song</h5>
+  </p>     
+  <% client = Soundcloud.new(client_id: 'e39a5e9dec883d7b2507d6dbb47887d2') %>
+  <% embed_info = client.get('/oembed', url: @concert.song) %>
+  <%= embed_info['html'].html_safe %>
+</div>
+<% end %>
 <p>
   <% if user_signed_in? && (current_user == @concert.user) %>
     <%= link_to 'Edit Post', edit_concert_path(@concert), class: "btn btn-warning btn-small" %>
