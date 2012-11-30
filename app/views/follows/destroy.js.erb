@@ -1,0 +1,1 @@
+$(".following<%=@user.id%>").html('<%= link_to "Follow #{@user.full_name}", new_user_follow_path(@user),remote: true, class: "btn btn-primary btn-small" %>');

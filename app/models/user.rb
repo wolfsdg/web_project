@@ -10,5 +10,16 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
 
   has_many :concerts
-  has_many :follows
+  
+  has_many :follower_follow, :class_name => "Follow"
+  has_many :followers, :through => :follower_follow
+
+  has_many :followed_follow, :class_name => "Follow", :foreign_key => :follower_id
+  has_many :followeds, :through => :followed_follow, :source => :user_id
+
+
+  def concert_followed
+    Concert.where(:user_id => followeds)
+  end  
+
 end

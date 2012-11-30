@@ -19,3 +19,8 @@ body {
 .alert {
   margin-top: 20px
 }
+
+.line{
+  display: inline;
+  margin-left: 5px;
+}

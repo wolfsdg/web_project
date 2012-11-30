@@ -3,11 +3,12 @@ class FollowsController < ApplicationController
   def new 
     @user = User.find(params[:user_id])
     @follow = Follow.new
-    @follow.followed_id = @user.id
+    @follow.user_id = @user.id
     @follow.follower_id = current_user.id
     @follow.save 
 
     respond_to do |format|
+      format.html{redirect_to concerts_path, notice: "jjejej"}
       format.js 
     end 
   end
@@ -18,6 +19,7 @@ class FollowsController < ApplicationController
     @follow.destroy
 
     respond_to do |format|
+      format.html{redirect_to concerts_path, notice: "se jue"}
       format.js
     end
   end

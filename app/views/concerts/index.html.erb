@@ -1,11 +1,13 @@
 <div class="page-header">
   <h1>All Concerts</h1>
 </div>
-
+ 
 <% @concerts.each do |concert| %>
   <div class="row-fluid">
     <div class="span2">
-      <%= image_tag concert.poster.url(:thumb) if !concert.poster_file_name.nil? %>
+      <% unless concert.poster_file_name.nil?%>
+        <%= image_tag(concert.poster.url(:thumb), class: "img-polaroid") %>
+      <% end%>
     </div>
     <div class="span10">
       <div class="concert">
@@ -13,15 +15,24 @@
           <p>Day of de Event: <%= concert.date.strftime("%d-%m-%Y") %></p>
           <p>Guest artis: <%= concert.name_art %></p>
           <p>Price: USD <%= concert.price %></p>
-          <div class="meta">
-            post by <%= concert.user.full_name %> | <%= concert.created_at.strftime("%d-%m-%Y")  %>
+            post by <%= concert.user.full_name %> | <%= concert.created_at.strftime("%d-%m-%Y")  %> |
+            <% unless user_signed_in? && concert.user == current_user%>
+            <div class="following<%=concert.user.id%> line">
+              <% if concert.user.followers.blank? %>
+                <%= link_to "Follow #{concert.user.full_name}", new_user_follow_path(concert.user),remote: true, class: "btn btn-primary btn-small" %>  
+              <% else %>
+                <% foll = Follow.where("follower_id = #{current_user[:id]} and user_id = #{concert.user.id}").first
+                %>
+                <%= link_to "Unfollow #{concert.user.full_name}", user_follow_path(concert.user,foll),method: :delete, remote: true, class: "btn btn-small" %>  
+              <% end %> 
+            </div>
+            <% end %>
             <% if current_user == concert.user %>
             <span class = "admin">
               | <%= link_to 'Edit', edit_concert_path(concert), class: "btn btn-warning" %>
               | <%= link_to 'Delete', concert, method: :delete, data: { confirm: 'Are you sure Delete this status?' }, class: "btn btn-danger" %>
             </span>
             <% end %>
-          </div>
       </div>
     </div>
   </div> 
